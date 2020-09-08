@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class main {
-    public static String fileName = "C:\\Users\\austi\\Files\\IdeaProjects\\MazeSolver\\Mazes\\daedlus2.txt";
+    public static String fileName = "C:\\Users\\austi\\Files\\Intellij\\MazeSolver\\Mazes\\daedlus2.txt";
 
     public static void main(String[] args) {
 
