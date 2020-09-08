@@ -18,11 +18,12 @@ public class fileReader {
                 String data = myReader.nextLine();
                 inputMaze.add(new ArrayList<Boolean>());
                 for (int counter = 0; counter < data.length(); counter++) {
-                    if (data.charAt(counter) == '#') {
+                    if (data.charAt(counter) == '#' || data.charAt(counter) == '1') {
                         inputMaze.get(i).add(true);
-                    } else {
+                    } else if(data.charAt(counter) == ' ' || data.charAt(counter) == '0'){
                         inputMaze.get(i).add(false);
                     }
+                    else{}
                 }
             }
             myReader.close();
@@ -35,8 +36,11 @@ public class fileReader {
         return (inputMaze);
     }
 
-    fileReader(String fileName) {//constructor
-        this.maze = readFile(fileName);//reads file
+    fileReader(String fileName, int type) {//constructor
+        if(type == 0){
+            this.maze = readFile(fileName);//reads file
+        }
+
     }
 
     public ArrayList<ArrayList<Boolean>> outputMaze() {
@@ -44,6 +48,7 @@ public class fileReader {
     }
 
     public void printMaze() {
+        System.out.print("Maze loaded being printed:\n");
         for (int counter = 0; counter < this.maze.size(); counter++) {
             for (int counterNested = 0; counterNested < this.maze.get(counter).size(); counterNested++) {
                 if (this.maze.get(counter).get(counterNested)) {
