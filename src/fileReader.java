@@ -45,14 +45,14 @@ public class fileReader {
 
     public void printMaze() {
         for (int counter = 0; counter < this.maze.size(); counter++) {
-            for (int counterNested = 0; counter < this.maze.get(counter).size(); counterNested++) {
-                if (this.maze.get(counter).get(counterNested) == true) {
-                    System.out.print(1);
+            for (int counterNested = 0; counterNested < this.maze.get(counter).size(); counterNested++) {
+                if (this.maze.get(counter).get(counterNested)) {
+                    System.out.print("#");
                 } else {
-                    System.out.print(0);
+                    System.out.print(" ");
                 }
             }
-            System.out.print(" ");
+            System.out.print("\n");
         }
     }
 }
