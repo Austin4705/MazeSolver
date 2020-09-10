@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class main {
-    public static String fileName = "C:\\Users\\austi\\Files\\Intellij\\MazeSolver\\Mazes\\daedlus2.txt";
+    public static String fileName = "C:\\Users\\austi\\Files\\Intellij\\MazeSolver\\Mazes\\mazebitmap.bmp";
 
     public static void main(String[] args) {
 //        System.out.print("Maze Solver Text(0), Image(1): ");
@@ -13,5 +13,6 @@ public class main {
 //        int type = inputTerminal.nextInt();
         fileReader mazeFile = new fileReader(fileName, 0);
         mazeFile.printMaze();
+        //nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());
     }
 }
