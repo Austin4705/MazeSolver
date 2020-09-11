@@ -42,7 +42,6 @@ public class fileReader {
         if(type == 0){
             this.maze = readFile(fileName);//reads file
         }
-
     }
 
     public ArrayList<ArrayList<Boolean>> outputMaze() {

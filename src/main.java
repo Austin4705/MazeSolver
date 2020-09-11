@@ -13,6 +13,6 @@ public class main {
 //        int type = inputTerminal.nextInt();
         fileReader mazeFile = new fileReader(fileName, 0);
         mazeFile.printMaze();
-        //nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());
+        nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());
     }
 }
