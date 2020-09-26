@@ -12,7 +12,6 @@ public class fileReader {
     public ArrayList<ArrayList<Boolean>> readFile(String fileName) {//opens the file and stores the maze in maze
         ArrayList<ArrayList<Boolean>> inputMaze = new ArrayList<ArrayList<Boolean>>();
         try {
-
             File myObj = new File(fileName);//init file stuff
             Scanner myReader = new Scanner(myObj);
             //ArrayList<ArrayList<Boolean>> mazes = new ArrayList<ArrayList<Boolean>>();//
