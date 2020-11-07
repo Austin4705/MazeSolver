@@ -3,6 +3,7 @@ import java.io.*;
 
 public class nodeGenerator {
     nodeTree NodeTree = new nodeTree();
+
     public nodeGenerator(ArrayList<ArrayList<Boolean>> inputmaze){
         startNodes(inputmaze);
     }

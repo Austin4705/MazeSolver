@@ -8,11 +8,8 @@ public class main {
     public static String fileName = "C:\\Users\\austi\\Files\\Intellij\\MazeSolver\\Mazes\\daedlus2.txt";
 
     public static void main(String[] args) {
-//        System.out.print("Maze Solver Text(0), Image(1): ");
-//        Scanner inputTerminal = new Scanner(System.in);
-//        int type = inputTerminal.nextInt();
-        fileReader mazeFile = new fileReader(fileName, 0);
-        mazeFile.printMaze();
-        nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());//inputting parsed data into the node genenerator script
+        fileReader mazeFile = new fileReader(fileName, fileReader.type.txt);//read the file
+        mazeFile.printMaze();//print it for debugging
+        nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());//inputting parsed data into the node generator script
     }
 }
