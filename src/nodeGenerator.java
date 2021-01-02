@@ -25,7 +25,6 @@ class nodeTree {
         startNodes.add(new node(x, 0));{
         }
     }
-
 }
 class node {
     node (int inputx, int inputy){
@@ -34,9 +33,8 @@ class node {
     }
     public int x; //x chordnate
     public int y; //y chordnate
-}
-class connections{
-    connections(node firstNode, node secondNode){
-
-    }
+    public node leftNode = null;
+    public node rightNode = null;
+    public node upNode = null;
+    public node downNode = null;
 }
