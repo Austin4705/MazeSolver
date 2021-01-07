@@ -8,6 +8,7 @@ public class main {
     public static String fileName = "C:\\Users\\austi\\Files\\Intellij\\MazeSolver\\Mazes\\daedlus2.txt";
 
     public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
         fileReader mazeFile = new fileReader(fileName, fileReader.type.txt);//read the file
         mazeFile.printMaze();//print it for debugging
         nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());//inputting parsed data into the node generator script
