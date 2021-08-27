@@ -17,7 +17,7 @@ public class nodeGenerator {
     //finds the starting point for the tree
     private node startNodes(ArrayList<Boolean> inputLine){
         for(int i = 0; i < inputLine.size(); i++) {
-            if (inputLine.get(i) == false) {
+            if (!inputLine.get(i)) {
                 return(new node(i, 0));
             }
         }
@@ -38,13 +38,13 @@ public class nodeGenerator {
                     if(++i <= inputMaze.size()-1 ){
                         if(!inputMaze.get(++i).get(j)){uC = true;}
                     }
-                    if(--i >=0 ){
+                    if(--i >= 0 ){
                         if(!inputMaze.get(--i).get(j)){dC = true;}
                     }
                     if(j++ <=inputMaze.get(i).size()-1 ){
                         if(!inputMaze.get(i).get(++j)){rC = true;}
                     }
-                    if(--j >=0 ){
+                    if(--j >= 0 ){
                         if(!inputMaze.get(i).get(--j)){lC = true;}
                     }
                     //If there is a corner of any type

@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class main {
-    public static String fileName = "C:\\Users\\austi\\Files\\Intellij\\MazeSolver\\Mazes\\daedlus2.txt";
+    //C:\Dev\MazeSolver\Mazes
+    public static String fileName = "daedlus2.txt";
 
     public static void main(String[] args) {
-        fileReader mazeFile = new fileReader(fileName, fileReader.type.txt);//read the file
+        String dir = System.getProperty("user.dir");
+        String filePath = dir.substring(0, dir.length()-4) + "\\Mazes\\" + fileName;
+        System.out.println("Path: " + filePath);
+
+        fileReader mazeFile = new fileReader(filePath, fileReader.type.txt);//read the file
         mazeFile.printMaze();//print it for debugging
         nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());//inputting parsed data into the node generator script
     }
