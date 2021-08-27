@@ -41,7 +41,7 @@ public class nodeGenerator {
                     if(--i >= 0 ){
                         if(!inputMaze.get(--i).get(j)){dC = true;}
                     }
-                    if(j++ <=inputMaze.get(i).size()-1 ){
+                    if(++j <=inputMaze.get(i).size() - 1{
                         if(!inputMaze.get(i).get(++j)){rC = true;}
                     }
                     if(--j >= 0 ){
