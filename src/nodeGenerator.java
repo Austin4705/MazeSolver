@@ -1,40 +1,69 @@
 import java.util.ArrayList;
 import java.io.*;
 
+//turns the
 public class nodeGenerator {
-    nodeTree NodeTree = new nodeTree();
+    private node startNode = null;
+    private ArrayList<ArrayList<Boolean>> inputMaze;
+    ArrayList<node> nodeList;
 
-    public nodeGenerator(ArrayList<ArrayList<Boolean>> inputmaze){
-        startNodes(inputmaze);
+    public nodeGenerator(ArrayList<ArrayList<Boolean>> _inputMaze){
+        inputMaze = _inputMaze;
+        startNode = startNodes(inputMaze.get(0));
+        searchNode();
+        printNodes();
     }
-    private void startNodes(ArrayList<ArrayList<Boolean>> inputmaze){//finds the starting point for the tree
-        for(int counter = 0; counter < inputmaze.get(0).size(); counter++) {
-            if (inputmaze.get(0).get(counter) == false) {
-                NodeTree.addStartNode(counter);
-                System.out.print("Starting Points (line 1, xchords): ");
-                System.out.print(counter+1);
-                System.out.print("\nNodes:\n");
+
+    //finds the starting point for the tree
+    private node startNodes(ArrayList<Boolean> inputLine){
+        for(int i = 0; i < inputLine.size(); i++) {
+            if (inputLine.get(i) == false) {
+                return(new node(i, 0));
+            }
+        }
+        System.out.println("No Start Node Found");
+        return(new node(0, 0));
+    }
+
+    //Search node
+    private void searchNode(){
+        nodeList = new ArrayList<node>();
+        for(int i = 0; i < inputMaze.size(); i++){
+            for (int j = 0; j < inputMaze.get(i).size(); j++){
+                //For each spot
+                //If it is a maze part
+                if(!inputMaze.get(i).get(j)){
+                    //Check if there is an intersection or corner piece
+                    boolean lC = false, rC = false, uC = false, dC = false;
+                    if(++i <= inputMaze.size()-1 ){
+                        if(!inputMaze.get(++i).get(j)){uC = true;}
+                    }
+                    if(--i >=0 ){
+                        if(!inputMaze.get(--i).get(j)){dC = true;}
+                    }
+                    if(j++ <=inputMaze.get(i).size()-1 ){
+                        if(!inputMaze.get(i).get(++j)){rC = true;}
+                    }
+                    if(--j >=0 ){
+                        if(!inputMaze.get(i).get(--j)){lC = true;}
+                    }
+                    //If there is a corner of any type
+                    if( (lC || rC) && (uC || dC)){
+                        nodeList.add(new node(i, j));
+                    }
+                }
+
             }
         }
     }
-
-}
-class nodeTree {
-    ArrayList<node> startNodes = new ArrayList<>();
-    void addStartNode(int x){
-        startNodes.add(new node(x, 0));{
+    
+    public void printNodes(){
+        for (node x: nodeList) {
+            System.out.println("X: " + x.x + ", Y: " + x.y);
         }
     }
 }
-class node {
-    node (int inputx, int inputy){
-        x = inputx;
-        y = inputy;
-    }
-    public int x; //x chordnate
-    public int y; //y chordnate
-    public node leftNode = null;
-    public node rightNode = null;
-    public node upNode = null;
-    public node downNode = null;
-}
+/*
+
+
+ */

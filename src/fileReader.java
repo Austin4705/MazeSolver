@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
+//Parses the file and turns it into a boolean arr
 public class fileReader {
     private ArrayList<ArrayList<Boolean>> maze; //what the maze is stored in
 
     public enum type{
-        txt,
-        png
+        txt, png
     }
 
     fileReader(String fileName, type _type) {//constructor
