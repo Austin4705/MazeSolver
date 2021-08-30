@@ -6,7 +6,7 @@ public class nodeGenerator {
 
     private node startNode = null;
     private ArrayList<ArrayList<Boolean>> inputMaze;
-    private String[][] nodes;
+    private ArrayList<ArrayList<String>> nodes;
     ArrayList<node> nodeList;
 
     public ArrayList<ArrayList<String>> getNodes(){
@@ -16,7 +16,7 @@ public class nodeGenerator {
     public nodeGenerator(ArrayList<ArrayList<Boolean>> _inputMaze){
         inputMaze = _inputMaze;
         startNode = startNodes(inputMaze.get(0));
-        nodes = new String[inputMaze.size()][inputMaze.size()];
+        nodes = new ArrayList<ArrayList<String>>();
         searchNode();
         printNodes();
     }
@@ -37,6 +37,7 @@ public class nodeGenerator {
         nodeList = new ArrayList<node>();
 
         for(int i = 0; i < inputMaze.size(); i++){
+            nodes.add(new ArrayList<String>());
             for (int j = 0; j < inputMaze.get(i).size(); j++){
                 //For each spot
                 //If it is a maze part
@@ -45,20 +46,23 @@ public class nodeGenerator {
                 if(!inputMaze.get(i).get(j)){
                     //Check if there is an intersection or corner piece
                     boolean lC = false, rC = false, uC = false, dC = false;
+                    int counter = 0;
                     if(i + 1 <= inputMaze.size()-1 ){
-                        if(!inputMaze.get(i+1).get(j)){dC = true;}
+                        if(!inputMaze.get(i+1).get(j)){dC = true; counter++;}
                     }
                     if(i- 1 >= 0 ){
-                        if(!inputMaze.get(i-1).get(j)){uC = true;}
+                        if(!inputMaze.get(i-1).get(j)){uC = true; counter++;}
                     }
                     if(j + 1 <= inputMaze.get(i).size() - 1){
-                        if(!inputMaze.get(i).get(j+1)){rC = true;}
+                        if(!inputMaze.get(i).get(j+1)){rC = true; counter++;}
                     }
                     if(j- 1 >= 0 ){
-                        if(!inputMaze.get(i).get(j-1)){lC = true;}
+                        if(!inputMaze.get(i).get(j-1)){lC = true; counter++;}
                     }
                     //If there is a corner of any type
-                    if( (lC || rC) && (uC || dC)){
+
+                    if( ((lC || rC) && (uC || dC)) || counter != 2
+                    ){
                         isNode = true;
                         nodeList.add(new node(i, j));
                     }
@@ -66,6 +70,9 @@ public class nodeGenerator {
 
                 if (isNode){
                     nodes.get(i).add("X");
+                }
+                else if (!inputMaze.get(i).get(j)){
+                    nodes.get(i).add("H");
                 }
                 else{
                     nodes.get(i).add("0");

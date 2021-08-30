@@ -11,13 +11,12 @@ public class main {
 
     public static void main(String[] args) {
         String dir = System.getProperty("user.dir");
-        String filePath = dir.substring(0, dir.length()-4) + "\\Mazes\\" + fileName;
+        String filePath = dir.substring(0, dir.length()) + "\\Mazes\\" + fileName;
         System.out.println("Path: " + filePath);
 
         fileReader mazeFile = new fileReader(filePath, fileReader.type.txt);//read the file
         mazeFile.printMaze();//print it for debugging
         nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());//inputting parsed data into the node generator script
-        ArrayList<ArrayList<String>> place = NodeGenerator.getNodes();
-        mazeFile.printMazeIn(place);
+        mazeFile.printMazeIn(NodeGenerator.getNodes());
     }
 } 

@@ -30,7 +30,7 @@ public class fileReader {
         for (int counter = 0; counter < this.maze.size(); counter++) {
             for (int counterNested = 0; counterNested < this.maze.get(counter).size(); counterNested++) {
                 if (this.maze.get(counter).get(counterNested)) {
-                    System.out.print("☐");
+                    System.out.print("#");
                 } else {
                     System.out.print(" ");
                 }
@@ -48,9 +48,10 @@ public class fileReader {
                 }
                 else {
                     if (this.maze.get(counter).get(counterNested)) {
-                        System.out.print("☐");
-                    } else {
                         System.out.print(" ");
+                        //☐
+                    } else {
+                        System.out.print("#");
                     }
                 }
             }
