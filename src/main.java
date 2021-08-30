@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files
 
+
 public class main {
     //C:\Dev\MazeSolver\Mazes
     public static String fileName = "daedlus2.txt";
@@ -16,5 +17,7 @@ public class main {
         fileReader mazeFile = new fileReader(filePath, fileReader.type.txt);//read the file
         mazeFile.printMaze();//print it for debugging
         nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());//inputting parsed data into the node generator script
+        ArrayList<ArrayList<String>> place = NodeGenerator.getNodes();
+        mazeFile.printMazeIn(place);
     }
 } 

@@ -1,6 +1,7 @@
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -29,9 +30,28 @@ public class fileReader {
         for (int counter = 0; counter < this.maze.size(); counter++) {
             for (int counterNested = 0; counterNested < this.maze.get(counter).size(); counterNested++) {
                 if (this.maze.get(counter).get(counterNested)) {
-                    System.out.print("#");
+                    System.out.print("☐");
                 } else {
                     System.out.print(" ");
+                }
+            }
+            System.out.print("\n");
+        }
+    }
+
+    public void printMazeIn(ArrayList<ArrayList<String>> extra) {
+        System.out.print("Maze loaded being printed:\n");
+        for (int counter = 0; counter < this.maze.size(); counter++) {
+            for (int counterNested = 0; counterNested < this.maze.get(counter).size(); counterNested++) {
+                if(!Objects.equals(extra.get(counter).get(counterNested), "0")){
+                    System.out.print(extra.get(counter).get(counterNested));
+                }
+                else {
+                    if (this.maze.get(counter).get(counterNested)) {
+                        System.out.print("☐");
+                    } else {
+                        System.out.print(" ");
+                    }
                 }
             }
             System.out.print("\n");
