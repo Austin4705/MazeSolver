@@ -1,24 +1,102 @@
 import java.util.ArrayList;
 import java.io.*;
+import java.lang.Object;
+import java.util.HashMap;
 
 //turns the
 public class nodeGenerator {
 
-    private node startNode = null;
-    private ArrayList<ArrayList<Boolean>> inputMaze;
-    private ArrayList<ArrayList<String>> nodes;
-    ArrayList<node> nodeList;
+    private ArrayList<ArrayList<Boolean>> inputMaze; //Boolean input maze of walls of walkway
+    //inputMaze -> nodes -> used to find the collision --\/
+    // L--> nodeMap -> hash when a collision with node  -> startNode
+    // L--> nodeList -> List to index each node         ---^
+    private node startNode = null; //tree of the nodes, also the final version finishes off the tree
+    private ArrayList<ArrayList<String>> nodes; //List of the parsed nodes
+    private HashMap<String, node> nodeMap = new HashMap<>(); //Un ordered hash map of the nodes
+    ArrayList<node> nodeList; //Array list of the nodes
 
     public ArrayList<ArrayList<String>> getNodes(){
         return nodes;
     }
+    static enum dir{
+      left, right, up, down
+    };
 
     public nodeGenerator(ArrayList<ArrayList<Boolean>> _inputMaze){
         inputMaze = _inputMaze;
         startNode = startNodes(inputMaze.get(0));
         nodes = new ArrayList<ArrayList<String>>();
+
         searchNode();
+        inputMaze = null;
+
         printNodes();
+        buildTree();
+        nodes = null; nodeMap = null; nodeList = null;
+
+
+    }
+
+    //TODO could parallelize
+    private void buildTree(){
+        for (var x: nodeList) {
+            findObj(x, dir.left, false, 0);
+            findObj(x, dir.right, true, inputMaze.get(x.i).size());
+            findObj(x, dir.up, false, 0);
+            findObj(x, dir.down, true, inputMaze.size());
+        }
+    }
+
+    private void findObj(node base, dir direction, boolean increment, int stop){
+        node foundNode = null;
+        boolean isNodeFound = false;
+        int i = base.i, j = base.j;
+        switch (direction){
+            case up -> {
+                for (;i < stop; i--) {
+                    if(){
+
+                    }
+                }
+            }
+            case down -> {
+                for (; i < stop; i++) {
+
+                }
+            }
+            case left -> {
+                for (; i < stop; i++) {
+
+                }
+            }
+            case right -> {
+                for (int i = 0; i < stop; i++) {
+
+                }
+            }
+        }
+
+        //Iterate and find
+        if(isNodeFound){
+            String t = i + ", " + j;
+            foundNode = nodeMap.get(t);
+            switch (direction){
+                case up -> {
+                    foundNode.uN = base;
+                }
+                case down -> {
+                    foundNode.dN = base;
+                }
+                case left -> {
+                    foundNode.lN = base;
+                }
+                case right -> {
+                    foundNode.rN = base;
+                }
+            }
+        }
+
+
     }
 
     //finds the starting point for the tree
@@ -64,7 +142,10 @@ public class nodeGenerator {
                     if( ((lC || rC) && (uC || dC)) || counter != 2
                     ){
                         isNode = true;
-                        nodeList.add(new node(i, j));
+                        node tNode = new node(i, j);
+                        nodeList.add(tNode);
+                        String t = i + ", " + j;
+                        nodeMap.put(t, tNode);
                     }
                 }
 
@@ -84,7 +165,7 @@ public class nodeGenerator {
     
     public void printNodes(){
         for (node x: nodeList) {
-            System.out.println("X: " + x.x + ", Y: " + x.y);
+            System.out.println("X: " + x.j + ", Y: " + x.i);
         }
     }
 

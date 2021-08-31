@@ -1,7 +1,7 @@
 public class node {
-    node (int inputx, int inputy){
-        x = inputx;
-        y = inputy;
+    node (int inputj, int inputi){
+        j = inputj;
+        i = inputi;
     }
 
     //to
@@ -11,7 +11,7 @@ public class node {
     public node dN = null;
 
     //weight
-    public int x; //x chordnate
-    public int y; //y chordnate
+    public int i; //x chordnate
+    public int j; //y chordnate
 
 }
