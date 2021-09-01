@@ -12,6 +12,7 @@ public class nodeGenerator {
     // L--> nodeMap -> hash when a collision with node  -> startNode
     // L--> nodeList -> List to index each node         ---^
     private node startNode = null; //tree of the nodes, also the final version finishes off the tree
+    private node endNode = null;
     private ArrayList<ArrayList<String>> nodes; //List of the parsed nodes
     private HashMap<String, node> nodeMap = new HashMap<>(); //Un ordered hash map of the nodes
     ArrayList<node> nodeList; //Array list of the nodes
@@ -23,20 +24,22 @@ public class nodeGenerator {
       left, right, up, down
     };
 
+    //Constructor, basic flow of the class
     public nodeGenerator(ArrayList<ArrayList<Boolean>> _inputMaze){
         inputMaze = _inputMaze;
         startNode = startNodes(inputMaze.get(0));
         nodes = new ArrayList<ArrayList<String>>();
-
         searchNode();
         buildTree();
-
-        printNodes();
-
-
+        endNode(inputMaze.get(inputMaze.size()-1), inputMaze.size()-1);
     }
 
+    //returns the tree (what we use the class to find)
+    public node returnTree(){return startNode;}
+    public node returnEnd(){return endNode;}
+
     //TODO could parallelize
+    //looks if there is a node in each direction for each node
     private void buildTree(){
         for (var x: nodeList) {
             findObj(x, dir.left);
@@ -46,10 +49,12 @@ public class nodeGenerator {
         }
     }
 
+    //looks in a direction if there is a node and adds it to the node tree if there is
     private void findObj(node base, dir direction){
         node foundNode = null;
         boolean isNodeFound = false;
         int i = base.i, j = base.j;
+        int d = 1;
         switch (direction){
             case up -> {
                 for (;i >= 0; i--) {
@@ -57,12 +62,15 @@ public class nodeGenerator {
                         continue;
                    if(Objects.equals(nodes.get(i).get(j), "O"))
                        break;
-                    if(Objects.equals(nodes.get(i).get(j), "H"))
+                    if(Objects.equals(nodes.get(i).get(j), "H")){
+                        d++;
                         continue;
+                    }
                     if(Objects.equals(nodes.get(i).get(j), "X")){
                         String t = i + ", " + j;
                         foundNode = nodeMap.get(t);
                         isNodeFound = true;
+                        base.uND = d;
                         break;
                     }
                 }
@@ -73,12 +81,15 @@ public class nodeGenerator {
                         continue;
                     if(Objects.equals(nodes.get(i).get(j), "O"))
                         break;
-                    if(Objects.equals(nodes.get(i).get(j), "H"))
+                    if(Objects.equals(nodes.get(i).get(j), "H")){
+                        d++;
                         continue;
+                    }
                     if(Objects.equals(nodes.get(i).get(j), "X")){
                         String t = i + ", " + j;
                         foundNode = nodeMap.get(t);
                         isNodeFound = true;
+                        base.dND = d;
                         break;
                     }
                 }
@@ -89,12 +100,15 @@ public class nodeGenerator {
                         continue;
                     if(Objects.equals(nodes.get(i).get(j), "O"))
                         break;
-                    if(Objects.equals(nodes.get(i).get(j), "H"))
+                    if(Objects.equals(nodes.get(i).get(j), "H")){
+                        d++;
                         continue;
+                    }
                     if(Objects.equals(nodes.get(i).get(j), "X")){
                         String t = i + ", " + j;
                         foundNode = nodeMap.get(t);
                         isNodeFound = true;
+                        base.lND = d;
                         break;
                     }
                 }
@@ -105,12 +119,15 @@ public class nodeGenerator {
                         continue;
                     if(Objects.equals(nodes.get(i).get(j), "O"))
                         break;
-                    if(Objects.equals(nodes.get(i).get(j), "H"))
+                    if(Objects.equals(nodes.get(i).get(j), "H")){
+                        d++;
                         continue;
+                    }
                     if(Objects.equals(nodes.get(i).get(j), "X")){
                         String t = i + ", " + j;
                         foundNode = nodeMap.get(t);
                         isNodeFound = true;
+                        base.rND = d;
                         break;
                     }
                 }
@@ -140,8 +157,7 @@ public class nodeGenerator {
 
     }
 
-
-    //finds the starting point for the tree
+    //finds the starting point for the tree, mostly used just if there isn't one
     private node startNodes(ArrayList<Boolean> inputLine){
         for(int i = 0; i < inputLine.size(); i++) {
             if (!inputLine.get(i)) {
@@ -152,11 +168,24 @@ public class nodeGenerator {
         return(new node(0, 0));
     }
 
-    //Search node
+    //locates the end node
+    private node endNode(ArrayList<Boolean> inputLine, int jSize){
+        for(int i = 0; i < inputLine.size(); i++) {
+            if (!inputLine.get(i)) {
+                String t = jSize + ", " + i;//its reversed here but ok
+                node tN = nodeMap.get(t);
+                endNode = tN;
+                break;
+            }
+        }
+        System.out.println("No End Node Found");
+        return(new node(0, 0));
+    }
+
+    //Search the maze for all the squares that are nodes, also look for first node, set if wall or not node walkway too, and actually find first node
     private void searchNode(){
         nodeList = new ArrayList<node>();
         boolean firstNodeFlag = false;
-
         for(int i = 0; i < inputMaze.size(); i++){
             nodes.add(new ArrayList<String>());
             for (int j = 0; j < inputMaze.get(i).size(); j++){
@@ -182,7 +211,7 @@ public class nodeGenerator {
                     }
                     //If there is a corner of any type
 
-                    if( ((lC || rC) && (uC || dC)) || counter != 2
+                    if( ((lC || rC) && (uC || dC)) || counter != 2 /*|| i == inputMaze.size()-1*/
                     ){
                         isNode = true;
                         node tNode = new node(j, i);
@@ -209,7 +238,8 @@ public class nodeGenerator {
             }
         }
     }
-    
+
+    //Prints out a list of the nodes
     public void printNodes(){
         for (node x: nodeList) {
             System.out.println("X: " + x.j + ", Y: " + x.i);

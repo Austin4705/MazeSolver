@@ -17,7 +17,13 @@ public class main {
         fileReader mazeFile = new fileReader(filePath, fileReader.type.txt);//read the file
         mazeFile.printMaze();//print it for debugging
         nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());//inputting parsed data into the node generator script
+        //NodeGenerator.printNodes();
         mazeFile.printMazeIn(NodeGenerator.getNodes());
+        node baseNode = NodeGenerator.returnTree();
+        node endNode = NodeGenerator.returnEnd();
+        nodeSolver NodeSolver = new nodeSolver(baseNode, endNode);
+
+
 
     }
 } 
