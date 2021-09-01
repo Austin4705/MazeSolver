@@ -11,7 +11,7 @@ public class node {
     public node dN = null;
 
     //weight
-    public int i; //x chordnate
-    public int j; //y chordnate
+    public int i; //y chordnate
+    public int j; //x chordnate
 
 }

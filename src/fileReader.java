@@ -43,7 +43,7 @@ public class fileReader {
         System.out.print("Maze loaded being printed:\n");
         for (int counter = 0; counter < this.maze.size(); counter++) {
             for (int counterNested = 0; counterNested < this.maze.get(counter).size(); counterNested++) {
-                if(!Objects.equals(extra.get(counter).get(counterNested), "0")){
+                if(!Objects.equals(extra.get(counter).get(counterNested), " ")){
                     System.out.print(extra.get(counter).get(counterNested));
                 }
                 else {

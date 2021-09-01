@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.io.*;
 import java.lang.Object;
 import java.util.HashMap;
+import java.util.Objects;
 
 //turns the
 public class nodeGenerator {
@@ -28,11 +29,9 @@ public class nodeGenerator {
         nodes = new ArrayList<ArrayList<String>>();
 
         searchNode();
-        inputMaze = null;
+        buildTree();
 
         printNodes();
-        buildTree();
-        nodes = null; nodeMap = null; nodeList = null;
 
 
     }
@@ -40,38 +39,80 @@ public class nodeGenerator {
     //TODO could parallelize
     private void buildTree(){
         for (var x: nodeList) {
-            findObj(x, dir.left, false, 0);
-            findObj(x, dir.right, true, inputMaze.get(x.i).size());
-            findObj(x, dir.up, false, 0);
-            findObj(x, dir.down, true, inputMaze.size());
+            findObj(x, dir.left);
+            findObj(x, dir.right);
+            findObj(x, dir.up);
+            findObj(x, dir.down);
         }
     }
 
-    private void findObj(node base, dir direction, boolean increment, int stop){
+    private void findObj(node base, dir direction){
         node foundNode = null;
         boolean isNodeFound = false;
         int i = base.i, j = base.j;
         switch (direction){
             case up -> {
-                for (;i < stop; i--) {
-                    if(){
-
+                for (;i >= 0; i--) {
+                    if(i == base.i)
+                        continue;
+                   if(Objects.equals(nodes.get(i).get(j), "O"))
+                       break;
+                    if(Objects.equals(nodes.get(i).get(j), "H"))
+                        continue;
+                    if(Objects.equals(nodes.get(i).get(j), "X")){
+                        String t = i + ", " + j;
+                        foundNode = nodeMap.get(t);
+                        isNodeFound = true;
+                        break;
                     }
                 }
             }
             case down -> {
-                for (; i < stop; i++) {
-
+                for (; i < nodes.size(); i++) {
+                    if(i == base.i)
+                        continue;
+                    if(Objects.equals(nodes.get(i).get(j), "O"))
+                        break;
+                    if(Objects.equals(nodes.get(i).get(j), "H"))
+                        continue;
+                    if(Objects.equals(nodes.get(i).get(j), "X")){
+                        String t = i + ", " + j;
+                        foundNode = nodeMap.get(t);
+                        isNodeFound = true;
+                        break;
+                    }
                 }
             }
             case left -> {
-                for (; i < stop; i++) {
-
+                for (; j >= 0; j--) {
+                    if(j == base.j)
+                        continue;
+                    if(Objects.equals(nodes.get(i).get(j), "O"))
+                        break;
+                    if(Objects.equals(nodes.get(i).get(j), "H"))
+                        continue;
+                    if(Objects.equals(nodes.get(i).get(j), "X")){
+                        String t = i + ", " + j;
+                        foundNode = nodeMap.get(t);
+                        isNodeFound = true;
+                        break;
+                    }
                 }
             }
             case right -> {
-                for (int i = 0; i < stop; i++) {
-
+                for (; j < nodes.get(i).size(); j++) {
+                    if(j == base.j)
+                        continue;
+                    if(Objects.equals(nodes.get(i).get(j), "O"))
+                        break;
+                    if(Objects.equals(nodes.get(i).get(j), "H"))
+                        continue;
+                    if(Objects.equals(nodes.get(i).get(j), "X")){
+                        String t = i + ", " + j;
+                        foundNode = nodeMap.get(t);
+                        isNodeFound = true;
+                        break;
+                    }
                 }
             }
         }
@@ -82,22 +123,23 @@ public class nodeGenerator {
             foundNode = nodeMap.get(t);
             switch (direction){
                 case up -> {
-                    foundNode.uN = base;
+                     base.uN = foundNode;
                 }
                 case down -> {
-                    foundNode.dN = base;
+                    base.dN = foundNode;
                 }
                 case left -> {
-                    foundNode.lN = base;
+                    base.lN = foundNode;
                 }
                 case right -> {
-                    foundNode.rN = base;
+                    base.rN = foundNode;
                 }
             }
         }
 
 
     }
+
 
     //finds the starting point for the tree
     private node startNodes(ArrayList<Boolean> inputLine){
@@ -113,6 +155,7 @@ public class nodeGenerator {
     //Search node
     private void searchNode(){
         nodeList = new ArrayList<node>();
+        boolean firstNodeFlag = false;
 
         for(int i = 0; i < inputMaze.size(); i++){
             nodes.add(new ArrayList<String>());
@@ -142,10 +185,14 @@ public class nodeGenerator {
                     if( ((lC || rC) && (uC || dC)) || counter != 2
                     ){
                         isNode = true;
-                        node tNode = new node(i, j);
+                        node tNode = new node(j, i);
                         nodeList.add(tNode);
                         String t = i + ", " + j;
                         nodeMap.put(t, tNode);
+                        if(!firstNodeFlag){
+                            startNode = tNode;
+                            firstNodeFlag = true;
+                        }
                     }
                 }
 
@@ -156,7 +203,7 @@ public class nodeGenerator {
                     nodes.get(i).add("H");
                 }
                 else{
-                    nodes.get(i).add("0");
+                    nodes.get(i).add("O");
                 }
 
             }

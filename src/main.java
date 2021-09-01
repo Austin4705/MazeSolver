@@ -18,5 +18,6 @@ public class main {
         mazeFile.printMaze();//print it for debugging
         nodeGenerator NodeGenerator = new nodeGenerator(mazeFile.outputMaze());//inputting parsed data into the node generator script
         mazeFile.printMazeIn(NodeGenerator.getNodes());
+
     }
 } 
