@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="hyperdrive">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../Libraries/Java/hyperdrive" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../Libraries/Java/hyperdrive/src" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../Libraries/Java/hyperdrive" recursive="false" />
+  </library>
+</component>
