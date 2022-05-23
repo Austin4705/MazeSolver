@@ -3,27 +3,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class inputSystem {
-    private ArrayList<String> Map;
     public inputSystem(){
     }
 
     //main constructor line for file based reading.
     public inputSystem(String path){
         ArrayList<Character> input = readTxtFile(path);
-        int[] dimensions = mazeData.getInstance().data.dimensions();
-        int[] sumArr = mazeData.getInstance().dimensionCapPiSum();
-        int[] curLoc = new int[dimensions.length];
-        int num = 0;
         //effectively create a counter system that counts to variable length holding places
         //could run with mod arithmetic or seperate counter for each array, chose first for simplicity, although much slower but still constant time
         for(int i = 0; i < mazeData.getInstance().data.size(); i++){
-            curLoc[0] = num % sumArr[0];
-            for(int j = 1; j < curLoc.length; j++){// not o2. more n is very small so more like 5o max
-                curLoc[j] = (num % sumArr[j]) / sumArr[j-1];
-            }
-            mazeData.getInstance().data.set(curLoc, mazeData.charToInt(input.get(num)));
-            num++;
+            int[] curLoc = mazeData.getInstance().loopDimensions(i);
+            mazeData.getInstance().data.set(curLoc, mazeData.charToInt(input.get(i)));
         }
+
     }
 
     //transposes the file into a 2d array in memory. Easier to process like this

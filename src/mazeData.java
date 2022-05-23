@@ -1,14 +1,15 @@
 import org.api.hyperdrive.NArrayInt;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 
 //singleton implementation of class in order to function as object container. holds all data for the maze inclding the n dimensional array, solved path, and adjancy graph
 public class mazeData {
 //region singletonConstructor
     private static mazeData instance = null;
-    private mazeData() {
-
-    }
-
+    private mazeData() {}
+    //public singleton implementation function
     public static mazeData getInstance() {
         if (instance == null) {
             instance = new mazeData();
@@ -17,7 +18,10 @@ public class mazeData {
     }
 //endregion
 //region member
+    //multidimensional arrary in hyperdrive library package
     public NArrayInt data = null;
+    //adj list stored in the format of idx to node
+    public HashMap<Integer, node> adjList = new HashMap<Integer, node>();
 //endregion
 
 //region func
@@ -36,6 +40,16 @@ public class mazeData {
         return sumArr;
     }
 
+    //functinalized the loopinng through variuable nd arrays
+    public int[] loopDimensions(int num){
+        int[] sumArr = dimensionCapPiSum();
+        int[] curLoc = new int[sumArr.length];
+        curLoc[0] = num % sumArr[0];
+        for(int j = 1; j < curLoc.length; j++){// not o2. more n is very small so more like 5o max
+            curLoc[j] = (num % sumArr[j]) / sumArr[j-1];
+        }
+        return curLoc;
+    }
     //helper functions, both used to pass between data formats
     public static int charToInt(char c){
         if(c == 'O') return 0;
