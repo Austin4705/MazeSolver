@@ -1,5 +1,6 @@
 import org.api.hyperdrive.NArrayInt;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -20,8 +21,10 @@ public class mazeData {
 //region member
     //multidimensional arrary in hyperdrive library package
     public NArrayInt data = null;
-    //adj list stored in the format of idx to node
+    //adj list stored in the format of idx to node as well as start and end nodes
     public HashMap<Integer, node> adjList = new HashMap<Integer, node>();
+    public HashMap<Integer, node> adjListS = new HashMap<Integer, node>();
+    public HashMap<Integer, node> adjListE = new HashMap<Integer, node>();
 //endregion
 
 //region func
@@ -50,6 +53,22 @@ public class mazeData {
         }
         return curLoc;
     }
+
+    //returns list of all neightboring nodes to the current node
+    public ArrayList<int[]> neighborNodes(int[] cur){
+        //loop through all spots plus or minus and add it to the list if it doesnt overbound
+        ArrayList<int[]> retArr = new ArrayList<int[]>();
+        for(int i = 0; i < data.dimensions().length;  i++){
+            int[] tmpPlus = cur.clone(); tmpPlus[i] = tmpPlus[i]+1;
+            if(!(tmpPlus[i] >= data.dimensions()[i]))
+                retArr.add(tmpPlus);
+            int[] tmpMinus = cur.clone(); tmpMinus[i] = tmpMinus[i]-1;
+            if(!(tmpMinus[i] < 0))
+                retArr.add(tmpMinus);
+        }
+        return retArr;
+    }
+
     //helper functions, both used to pass between data formats
     public static int charToInt(char c){
         if(c == 'O') return 0;

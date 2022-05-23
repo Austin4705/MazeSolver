@@ -40,6 +40,7 @@ public class main {
         }
         System.out.println("Maze Successfully Loaded");
         //enter parsestage of code, dont need to pass around data but need to start off each bit of the algorithm
+        graphGenerator g = new graphGenerator();
     }
 
 } 
