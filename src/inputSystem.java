@@ -19,14 +19,14 @@ public class inputSystem {
     public inputSystem(String path){
         ArrayList<Character> input = readTxtFile(path);
         int[] dimensions = mazeData.getInstance().data.dimensions();
-        int[] curLoc = new int[dimensions.length];
         int[] sumArr = mazeData.getInstance().dimensionCapPiSum();
-        int num = 0, ptr = 0;
+        int[] curLoc = new int[dimensions.length];
+        int num = 0;
         //effectively create a counter system that counts to variable length holding places
         //could run with mod arithmetic or seperate counter for each array, chose first for simplicity, although much slower but still constant time
         for(int i = 0; i < mazeData.getInstance().getSum(); i++){
-            for(int j = 0; j < curLoc.length; curLoc++){
-
+            for(int j = 0; j < curLoc.length; j++){// not o2. more n is very small so more like 5o max
+                curLoc[j] = num % sumArr[j];
             }
             num++;
             mazeData.getInstance().data.set(curLoc, mazeData.charToInt(input.get(num)));

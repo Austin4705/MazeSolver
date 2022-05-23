@@ -3,7 +3,7 @@ import java.lang.Object.*;
 import java.lang.reflect.Array;
 
 
-//singleton implementation of class in order to function as object container.
+//singleton implementation of class in order to function as object container. holds all data for the maze inclding the n dimensional array, solved path, and adjancy graph
 public class mazeData {
 //region singletonConstructor
     private static mazeData instance = null;
@@ -49,6 +49,7 @@ public class mazeData {
         if(c == 'E') return 3;
         else return -1;
     }
+    //helper functions, both used to pass between data formats
     public static char intToChar(int i){
         if(i == 0) return ' ';
         if(i == 1) return 'X';
