@@ -16,12 +16,13 @@ public class inputSystem {
         int num = 0;
         //effectively create a counter system that counts to variable length holding places
         //could run with mod arithmetic or seperate counter for each array, chose first for simplicity, although much slower but still constant time
-        for(int i = 0; i < mazeData.getInstance().getSum(); i++){
-            for(int j = 0; j < curLoc.length; j++){// not o2. more n is very small so more like 5o max
-                curLoc[j] = num % sumArr[j];
+        for(int i = 0; i < mazeData.getInstance().data.size(); i++){
+            curLoc[0] = num % sumArr[0];
+            for(int j = 1; j < curLoc.length; j++){// not o2. more n is very small so more like 5o max
+                curLoc[j] = (num % sumArr[j]) / sumArr[j-1];
             }
-            num++;
             mazeData.getInstance().data.set(curLoc, mazeData.charToInt(input.get(num)));
+            num++;
         }
     }
 
@@ -47,7 +48,7 @@ public class inputSystem {
             }
             sc.close();
             mazeData m = mazeData.getInstance(); m.makeArray(dimensions);
-            if(m.getSum() != inputSpace.size()) throw new RuntimeException("ListedMazeSize doesnt match inputted Data");
+            if(m.data.size() != inputSpace.size()) throw new RuntimeException("ListedMazeSize doesnt match inputted Data");
         } catch (FileNotFoundException e) {
             System.out.println("File not Found");
             e.printStackTrace();

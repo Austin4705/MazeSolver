@@ -18,15 +18,12 @@ public class mazeData {
 //endregion
 //region member
     public NArrayInt data = null;
-    private int sum = 1;
 //endregion
 
 //region func
     //intialization function in singleton class to actually make the n dimesnioal data arraay, wrapped around hyperdrive library
     public void makeArray(int[] dimensions){
         data = new NArrayInt(dimensions);
-        for(int p : data.dimensions())
-            sum *= p;//convert to big decimal later
     }
 
     //function in order to return an array based on dimensions in order to properly increment loop through
@@ -56,8 +53,6 @@ public class mazeData {
         else return 'O';
     }
     //getters
-    public int getSum(){
-        return sum;
-    }
+    //setters
 //endregion
 }

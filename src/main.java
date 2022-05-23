@@ -38,7 +38,7 @@ public class main {
             System.out.println("Reading from Path: " + filePath);
             i = new inputSystem(filePath);
         }
-
+        System.out.println("Maze Successfully Loaded");
         //enter parsestage of code, dont need to pass around data but need to start off each bit of the algorithm
 
 
