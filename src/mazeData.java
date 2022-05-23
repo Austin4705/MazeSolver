@@ -1,6 +1,4 @@
-package org.api.hyperdrive;
-import java.lang.Object.*;
-import java.lang.reflect.Array;
+import org.api.hyperdrive.NArrayInt;
 
 
 //singleton implementation of class in order to function as object container. holds all data for the maze inclding the n dimensional array, solved path, and adjancy graph
@@ -43,7 +41,7 @@ public class mazeData {
 
     //helper functions, both used to pass between data formats
     public static int charToInt(char c){
-        if(c == ' ') return 0;
+        if(c == 'O') return 0;
         if(c == 'X') return 1;
         if(c == 'S') return 2;
         if(c == 'E') return 3;
@@ -51,7 +49,7 @@ public class mazeData {
     }
     //helper functions, both used to pass between data formats
     public static char intToChar(int i){
-        if(i == 0) return ' ';
+        if(i == 0) return 'O';
         if(i == 1) return 'X';
         if(i == 2) return 'S';
         if(i == 3) return 'E';

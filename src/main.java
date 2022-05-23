@@ -8,11 +8,13 @@ import java.util.Scanner; // Import the Scanner class to read text files
 
 
 public class main {
-    public static final String filePath = $"";
+    public static final String fileName = "maze.txt";
+    public static final String filePath =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName;
+
     public static void main(String[] args) {
         //main cdoe and user interface to read the data form the file or user
         inputSystem i;
-        if(filePath != null){
+        if(filePath == null){
             System.out.println("Hello, and welcome to the maze solving algorhtm. What would you want to do?");
             System.out.println("Load SelectFile:1");
             System.out.println("Load ConsolePrompt:2");
@@ -21,6 +23,7 @@ public class main {
             if(n == 1){
                 System.out.println("Enter Path:");
                 String s = sc.nextLine();
+                System.out.println("Reading from Path: " + s);
                 i = new inputSystem(s);
             }
             else if(n == 2){
@@ -32,8 +35,10 @@ public class main {
             }
         }
         else{
-            i = inputSystem(filePath);
+            System.out.println("Reading from Path: " + filePath);
+            i = new inputSystem(filePath);
         }
+
         //enter parsestage of code, dont need to pass around data but need to start off each bit of the algorithm
 
 

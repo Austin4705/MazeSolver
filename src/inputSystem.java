@@ -1,14 +1,6 @@
-import org.api.hyperdrive.NArray;
-import org.api.hyperdrive.mazeData;
 import java.io.*;
-import java.lang.reflect.Array;
-import java.math.BigInteger;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.*;
 
 public class inputSystem {
     private ArrayList<String> Map;
