@@ -7,6 +7,14 @@ import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 
+
+/*
+Libraries and sources for referenced code used:
+https://www.baeldung.com/java-dijkstra
+https://github.com/adamierymenko/hyperdrive
+https://github.com/junit-team/junit5
+ */
+
 public class main {
     public static final String fileName = "maze.txt";
     public static final String filePath =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName;

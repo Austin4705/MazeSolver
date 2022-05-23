@@ -25,6 +25,8 @@ public class mazeData {
     public HashMap<Integer, node> adjList = new HashMap<Integer, node>();
     public HashMap<Integer, node> adjListS = new HashMap<Integer, node>();
     public HashMap<Integer, node> adjListE = new HashMap<Integer, node>();
+    //list in order of the path used for each pass of start to end for each combo
+    public ArrayList<ArrayList<node>> listDir = new ArrayList<ArrayList<node>>();
 //endregion
 
 //region func

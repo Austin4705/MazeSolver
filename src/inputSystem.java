@@ -15,7 +15,6 @@ public class inputSystem {
             int[] curLoc = mazeData.getInstance().loopDimensions(i);
             mazeData.getInstance().data.set(curLoc, mazeData.charToInt(input.get(i)));
         }
-
     }
 
     //transposes the file into a 2d array in memory. Easier to process like this

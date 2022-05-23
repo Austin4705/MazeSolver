@@ -29,14 +29,18 @@ public class graphGenerator {
         for(int i = 0; i < maze.data.size(); i++){
             int[] curArr = maze.loopDimensions(i);
             ArrayList<int[]> neighborNodes = maze.neighborNodes(curArr);
-            node h = maze.adjList.get(maze.data.indexOf(curArr));
-            if(h != null){//should be another way of saying node being tested is not a wall or error since it doesnt exist in adjList
+            if(maze.adjList.get(maze.data.indexOf(curArr)) != null){//should be another way of saying node being tested is not a wall or error since it doesnt exist in adjList
                 for(int j = 0; j < neighborNodes.size(); j++){
                     int t = maze.data.get(neighborNodes.get(j));
                     if(t == 0 || t == 2 || t == 3){
                         //add to the currArr neighborList the neighborNode being tested
-                        node n = maze.adjList.get(neighborNodes.get(j));
-                        h.neighbors.add(n);
+                        maze.adjList.get(maze.data.indexOf(curArr)).neighbors.add(
+                            maze.adjList.get(
+                                    maze.data.indexOf(
+                                            neighborNodes.get(j)
+                                    )
+                            )
+                        );
                     }
                 }
             }

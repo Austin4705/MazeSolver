@@ -7,6 +7,7 @@ public class node {
     public int idx = 0;
     public node(){};
     public int[] dimensions;
+    public boolean usedAsPath = false;
     public node(int _value, int _idx){
         value = _value;
         idx = _idx;
