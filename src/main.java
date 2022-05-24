@@ -20,7 +20,7 @@ public class main {
     public static final String fileNameIn = "maze.txt";
     public static final String fileNameOutFile = "mazeOut.txt";
     public static final String fileNameOutStl = "mazeTest.stl";
-    public static boolean autoRead = false;
+    public static boolean autoRead = true;
     public static boolean autoWrite = false;
 
     public static void main(String[] args) throws InterruptedException {
@@ -73,7 +73,18 @@ public class main {
             else if(n == 3){
                 System.out.println("Output Path with suffix:");
                 String path = sc.next();
-                writer.writeTo3dObj(path);
+                System.out.println("Type 1-Yes, 2-No in order for:\n maze, path, start, end, whiteSpace if you want any of them included?");
+                int a = sc.nextInt();
+                boolean mazeInc = (a == 1);
+                int b = sc.nextInt();
+                boolean pathInc = (b == 1);
+                int c = sc.nextInt();
+                boolean startInc = (c == 1);
+                int d = sc.nextInt();
+                boolean endInc = (d == 1);
+                int e = sc.nextInt();
+                boolean whiteInc = (e == 1);
+                writer.writeTo3dObj(path, mazeInc, pathInc, startInc, endInc, whiteInc);
             }
             else{
                 throw new RuntimeException("Selection");
@@ -82,7 +93,7 @@ public class main {
         }
         else{
             writer.writeToFile(fileNameOutFile);
-            writer.writeTo3dObj(fileNameOutStl);
+            writer.writeTo3dObj(fileNameOutStl, true, false, false ,false, false);
         }
         System.out.println("Maze Solving and or Outputting Complete. Exiting Program. Have a nice day :)");
         System.exit(0);
