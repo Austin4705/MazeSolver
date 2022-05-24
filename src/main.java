@@ -17,17 +17,15 @@ https://github.com/junit-team/junit5
 
 public class main {
     public static final String subDir = "\\Mazes\\";
-    public static final String fileName = "maze.txt";
-    public static final String filePath =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) +  + fileName;
-    public static final String fileName2 = "mazeOut.txt";
-    public static final String filePath2 =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName2;
-    public static final String fileName3 = "mazeTest.stl";
-    public static final String filePath3 =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName3;
+    public static final String fileNameIn = "maze.txt";
+    public static final String fileNameOutFile = "mazeOut.txt";
+    public static final String fileNameOutStl = "mazeTest.stl";
 
     public static void main(String[] args) {
         //main cdoe and user interface to read the data form the file or user
-        inputSystem i;
-        if(filePath == null){
+        inputSystem input = new inputSystem();
+        //used to differentiate a debug mode where maze auto-loaded from final one
+        if(fileNameIn == null){
             System.out.println("Hello, and welcome to the maze solving algorhtm. What would you want to do?");
             System.out.println("Load SelectFile:1");
             System.out.println("Load ConsolePrompt:2");
@@ -35,36 +33,60 @@ public class main {
             int n = sc.nextInt();
             if(n == 1){
                 System.out.println("Enter Path:");
-                String s = sc.nextLine();
-                System.out.println("Reading from Path: " + s);
-                i = new inputSystem(s);
+                String path = sc.nextLine();
+                System.out.println("Reading from Path: " + path);
+                input.readTxtFile(path);
             }
             else if(n == 2){
                 System.out.println("Not Functional Yet");
-                i = new inputSystem();
+                input.readCMD();
             }
             else{
                 throw new RuntimeException("Selection");
             }
         }
         else{
-            System.out.println("Reading from Path: " + filePath);
-            i = new inputSystem(filePath);
+            System.out.println("Reading from Path: " + inputSystem.fullPathStr(fileNameIn));
+            input.readTxtFile(fileNameIn);
         }
         System.out.println("Maze Successfully Loaded, beginning solving stage");
         //enter parsestage of code, dont need to pass around data but need to start off each bit of the algorithm
         graphGenerator generator = new graphGenerator();
         mazeSolver solver = new mazeSolver();
         System.out.println("Maze Solved");
-
-        if(filePath2 == null){
-
-        }else{
-            graphWriter writer = new graphWriter();
-            writer.writeToFile(filePath2);
-            writer.writeTo3dObj(filePath3);
+        graphWriter writer = new graphWriter();
+        //used to differentiate a debug mode where maze auto-printed from final one
+        if(fileNameOutFile == null){
+            System.out.println("What would you like to Output to?\n1-file, 2-cmd, 3-stl:");
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+            if(n == 1){
+                System.out.println("Input Path:");
+                String path = sc.nextLine();
+                writer.writeToFile(path);
+            }
+            else if(n == 2){
+                System.out.println("Not Functional Yet");
+                writer.writeToCmd();
+            }
+            else if(n == 3){
+                System.out.println("Input Path:");
+                String path = sc.nextLine();
+                writer.writeTo3dObj(path);
+            }
+            else{
+                throw new RuntimeException("Selection");
+            }
+            System.out.println("Enter Path:");
+            String s = sc.nextLine();
+            System.out.println("Reading from Path: " + s);
         }
-
+        else{
+            writer.writeToFile(fileNameOutFile);
+            writer.writeTo3dObj(fileNameOutStl);
+        }
+        System.out.println("Maze Solving and or Outputting Complete. Exiting Program. Have a nice day :)");
+        System.exit(0);
     }
 
 } 
