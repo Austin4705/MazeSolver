@@ -1,13 +1,16 @@
 import java.util.HashSet;
 
-//basic container class for a node. Stores position of node adj graph, and value. More like a struct if anything
+//basic container class for a node. Stores position of node adj graph, and value. More like a struct if anything, don't like the getter setter convention in this case
 public class node {
     public int value = 0;
     public HashSet<node> neighbors = new HashSet<node>();
     public int idx = 0;
-    public node(){};
     public int[] dimensions;
     public boolean usedAsPath = false;
+    public int dist = Integer.MAX_VALUE;
+
+    //varying assortment of useful init constructors, self-explanatory
+    public node(){};
     public node(int _value, int _idx){
         value = _value;
         idx = _idx;

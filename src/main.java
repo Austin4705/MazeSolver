@@ -6,8 +6,6 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files
 
-
-
 /*
 Libraries and sources for referenced code used:
 https://www.baeldung.com/java-dijkstra
