@@ -1,0 +1,6 @@
+Solved Maze:
+XEXXX
+XOOOO
+XXXXO
+OOOOO
+SXXXX

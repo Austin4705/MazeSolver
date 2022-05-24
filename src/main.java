@@ -19,7 +19,7 @@ public class main {
     public static final String fileName = "maze.txt";
     public static final String filePath =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName;
     public static final String fileName2 = "mazeOut.txt";
-    public static final String filePath2 =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName;
+    public static final String filePath2 =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName2;
 
     public static void main(String[] args) {
         //main cdoe and user interface to read the data form the file or user
@@ -53,7 +53,7 @@ public class main {
         graphGenerator g = new graphGenerator();
         mazeSolver m = new mazeSolver();
         System.out.println("Maze Solved");
-
+        graphWriter gW = new graphWriter(filePath2);
     }
 
 } 

@@ -4,14 +4,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class graphWriter {
-        public graphWriter(){
+        public graphWriter(String fileName){
             embeddGraph();
-            writeToFile();
+            writeToFile(fileName);
         }
         public void writeToFile(String fileName){
             try{
                 FileWriter w = new FileWriter(fileName);
                 mazeData maze = mazeData.getInstance();
+                w.write("Solved Maze:\n");
                 w.write(mazeData.intToChar(maze.data.get(new int[maze.data.dimensions().length])));
                 for(int i = 1; i < maze.data.size(); i++){
                     int[] curArr = maze.loopDimensions(i);
@@ -23,6 +24,7 @@ public class graphWriter {
                     }
                     w.write(mazeData.intToChar(maze.data.get(curArr)));
                 }
+                w.close();
             }
             catch (FileNotFoundException e){
                 System.out.println("File not Found");
