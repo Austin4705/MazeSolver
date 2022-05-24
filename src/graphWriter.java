@@ -49,4 +49,83 @@ public class graphWriter {
                 }
             }
         }
+
+        public void writeTo3dObj(String fileName){
+            try{
+                mazeData maze = mazeData.getInstance();
+                if(maze.data.dimensions() <= 3){
+                    FileWriter w = new FileWriter(fileName);
+                    int[] dim = new int[3];
+                    dim[0] = 0; dim[1] = 0; dim[2] = 0;
+                    if(maze.data.dimensions() >= 1) dim[0] = maze.data.dimensions()[0];
+                    if(maze.data.dimensions() >= 2) dim[1] = maze.data.dimensions()[1];
+                    if(maze.data.dimensions() >= 3) dim[2] = maze.data.dimensions()[2];
+                    String s = "solid Maze\n";
+                    for(int i = 0; i < maze.data.size(); i++){
+
+                    }
+                    s += "endsolid Maze";
+                    w.write(s);
+                    w.close();
+                }
+                else{
+                    throw new RuntimeException("Over 3 dimensions");
+                }
+
+            }
+            catch (FileNotFoundException e){
+                System.out.println("File not Found");
+                e.printStackTrace();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+
+
+        private String cube(int x, int y, int z){
+            StringBuilder s = new StringBuilder();
+            for(int i = 0; i < 8; i++){
+                for(int j = 0; j < 8; j++){
+                    for(int k = 0; k < 8; k++){
+                        if(!(i == j || j == k || i == k)){
+                            int[] cord = {x, y, z};
+                            int[] iA = pointPlus(pointId(i), cord);
+                            int[] jA = pointPlus(pointId(j), cord);
+                            int[] kA = pointPlus(pointId(k), cord);
+                            s.append(oneFace(iA, jA, kA));
+                        }
+                    }
+                }
+            }
+            return s.toString();
+        }
+
+        private int[] pointId(int id){
+            int[][] ida = {
+                    {0, 0 ,0},
+                    {1, 0, 0}, {0, 1, 0}, {0, 0, 1},
+                    {1, 1, 0}, {1, 0, 1}, {0, 1, 1},
+                    {1, 1, 1}
+            };
+            return ida[id];
+        }
+        private int[] pointPlus(int[] cur, int[] xyz){
+            cur[0] += xyz[0]; cur[1] += xyz[1]; cur[2] += xyz[2];
+            return cur;
+        }
+        private String oneFace(int[] a, int[] b, int[] c) {
+            String s = "";
+            s += "facet normal 0 0 0\n";
+            s += "\touter loop\n";
+            s += "vertex " + a[0] + ", " + a[1] + ", " + a[2] + ",\n";
+            s += "vertex " + b[0] + ", " + b[1] + ", " + b[2] + ",\n";
+            s += "vertex " + c[0] + ", " + c[1] + ", " + c[2] + ",\n";
+            s += "\tendloop\n";
+            s += "endfacet\n";
+            return s;
+        }
+
+
 }
