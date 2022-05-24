@@ -4,15 +4,18 @@ import java.util.List;
 
 //basic container class for a node. Stores position of node adj graph, and value. More like a struct if anything
 public class node {
+
+    //main data stored in each node
     public int value = 0;
     public HashSet<node> neighbors = new HashSet<node>();
     public int idx = 0;
-    public node(){};
     public int[] dimensions;
     public boolean usedAsPath = false;
     public int dist = Integer.MAX_VALUE;
     public List<node> shortestPath = new LinkedList<node>();
 
+    //constructors that initialize the node. Very self-explanatory, syntax cleaners
+    public node(){};
     public node(int _value, int _idx){
         value = _value;
         idx = _idx;

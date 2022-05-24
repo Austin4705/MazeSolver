@@ -48,12 +48,18 @@ public class main {
             System.out.println("Reading from Path: " + filePath);
             i = new inputSystem(filePath);
         }
-        System.out.println("Maze Successfully Loaded");
+        System.out.println("Maze Successfully Loaded, beginning solving stage");
         //enter parsestage of code, dont need to pass around data but need to start off each bit of the algorithm
-        graphGenerator g = new graphGenerator();
-        mazeSolver m = new mazeSolver();
+        graphGenerator generator = new graphGenerator();
+        mazeSolver solver = new mazeSolver();
         System.out.println("Maze Solved");
-        graphWriter gW = new graphWriter(filePath2);
+
+        if(filePath2 == null){
+
+        }else{
+            graphWriter writer = new graphWriter(filePath2);
+        }
+
     }
 
 } 

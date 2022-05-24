@@ -14,6 +14,9 @@ public class mazeSolver{
         //in the future i would like to implement A* with a geometric distance heuristic. currently i think dijkstras will suffice for the project and any maze under 1000 len and 6 dimensions
         for(node start : mazeData.getInstance().adjListS.values()){
             for(node end : mazeData.getInstance().adjListE.values()){
+                start = mazeData.getInstance().adjList.get(start.idx);
+                end = mazeData.getInstance().adjList.get(end.idx);
+
                 //the actual dijkstras implementation is based off of Baeldung article on it
                 Set<node> settledNodes = new HashSet<node>();
                 Set<node> unsettledNodes = new HashSet<node>();
