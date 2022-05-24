@@ -6,12 +6,17 @@ import java.util.HashSet;
 import java.util.List;
 
 
-//singleton implementation of class in order to function as object container. holds all data for the maze inclding the n dimensional array, solved path, and adjancy graph
+/*singleton implementation of class in order to function as object container.
+*holds all data for the maze including the n dimensional array, solved path, and adjacency graph
+*acts as a sort of bridge in the middle between all the sub parts of algorithm, holding the data
+**/
 public class mazeData {
 //region singletonConstructor
+    //normal singleton implementation
     private static mazeData instance = null;
+    /**defualt private constructor*/
     private mazeData() {}
-    //public singleton implementation function
+    /**public singleton implementation function*/
     public static mazeData getInstance() {
         if (instance == null) {
             instance = new mazeData();
@@ -20,23 +25,27 @@ public class mazeData {
     }
 //endregion
 //region member
-    //multidimensional arrary in hyperdrive library package
+    //multidimensional array in hyper-drive library package
     public NArrayInt data = null;
-    //adj list stored in the format of idx to node as well as start and end nodes
+    //adj list stored in the format of idx to node as well as start and end nodes,
+    //remember each node contains a list of all connected nodes, makes it adj list
     public HashMap<Integer, node> adjList = new HashMap<Integer, node>();
     public HashMap<Integer, node> adjListS = new HashMap<Integer, node>();
     public HashMap<Integer, node> adjListE = new HashMap<Integer, node>();
-    //list in order of the path used for each pass of start to end for each combo
+    //list in order of the path used for each pass of start to end for each combo after being solved
     public ArrayList<List<node>> listDir = new ArrayList<List<node>>();
 //endregion
 
 //region func
-    //intialization function in singleton class to actually make the n dimesnioal data arraay, wrapped around hyperdrive library
+    /**initialization function in singleton class to actually make the n dimensional data array,
+     * wrapped around hyperdrive library*/
     public void makeArray(int[] dimensions){
         data = new NArrayInt(dimensions);
     }
 
-    //function in order to return an array based on dimensions in order to properly increment loop through
+    /**function in order to return an array based on dimensions in order to properly increment loop through
+     * essentially each element is the multiplicative sum of the cur value times everything before it,
+     * like a prefix multiple sum. The name is a bad math reference*/
     public int[] dimensionCapPiSum(){
         int[] dimArr = data.dimensions();
         int[] sumArr = new int[dimArr.length]; sumArr[0] = dimArr[0];
@@ -46,7 +55,11 @@ public class mazeData {
         return sumArr;
     }
 
-    //functinalized the loopinng through variuable nd arrays
+    /**
+     * functionality the looping through variable nd arrays. Time complexity o(dimension).
+     * Uses nice properties of modular arithmetic
+     * @param num number idx to loop through
+     * */
     public int[] loopDimensions(int num){
         int[] sumArr = dimensionCapPiSum();
         int[] curLoc = new int[sumArr.length];
@@ -57,7 +70,9 @@ public class mazeData {
         return curLoc;
     }
 
-    //returns list of all neightboring nodes to the current node
+    /**returns list of all neighboring nodes to the current node
+     * @param cur current dimensions to look around at
+     * */
     public ArrayList<int[]> neighborNodes(int[] cur){
         //loop through all spots plus or minus and add it to the list if it doesnt overbound
         ArrayList<int[]> retArr = new ArrayList<int[]>();
@@ -72,7 +87,8 @@ public class mazeData {
         return retArr;
     }
 
-    //helper functions, both used to pass between data formats
+    /**helper functions, both used to pass between data formats
+     * @param c char to help*/
     public static int charToInt(char c){
         if(c == 'O') return 0;
         if(c == 'X') return 1;
@@ -81,7 +97,8 @@ public class mazeData {
         if(c == 'P') return 4;
         else return -1;
     }
-    //helper functions, both used to pass between data formats
+    /**helper functions, both used to pass between data formats
+     * @param i int to help out convert*/
     public static char intToChar(int i){
         if(i == 0) return 'O';
         if(i == 1) return 'X';
