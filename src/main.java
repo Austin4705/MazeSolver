@@ -16,10 +16,13 @@ https://github.com/junit-team/junit5
  */
 
 public class main {
+    public static final String subDir = "\\Mazes\\";
     public static final String fileName = "maze.txt";
-    public static final String filePath =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName;
+    public static final String filePath =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) +  + fileName;
     public static final String fileName2 = "mazeOut.txt";
     public static final String filePath2 =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName2;
+    public static final String fileName3 = "mazeTest.stl";
+    public static final String filePath3 =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName3;
 
     public static void main(String[] args) {
         //main cdoe and user interface to read the data form the file or user
@@ -57,7 +60,9 @@ public class main {
         if(filePath2 == null){
 
         }else{
-            graphWriter writer = new graphWriter(filePath2);
+            graphWriter writer = new graphWriter();
+            writer.writeToFile(filePath2);
+            writer.writeTo3dObj(filePath3);
         }
 
     }

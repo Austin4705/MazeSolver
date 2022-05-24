@@ -8,6 +8,7 @@ public class inputSystem {
 
     //main constructor line for file based reading.
     public inputSystem(String path){
+        path = inputSystem.fullPathStr(path);
         ArrayList<Character> input = readTxtFile(path);
         //effectively create a counter system that counts to variable length holding places
         //could run with mod arithmetic or seperate counter for each array, chose first for simplicity, although much slower but still constant time
@@ -45,5 +46,9 @@ public class inputSystem {
             e.printStackTrace();
         }
         return (inputSpace);
+    }
+
+    public static String fullPathStr(String subPath){
+        return System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + main.subDir + subPath;
     }
 }

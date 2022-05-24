@@ -4,14 +4,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class graphWriter {
-        public graphWriter(String fileName){
+        public graphWriter(){
             embeddGraph();
-            writeToFile(fileName);
         }
 
         //takes the maze in the multidimensional array that has the embedding of the path to solve the maze, uses it to write into a suggested file
         public void writeToFile(String fileName){
             try{
+                fileName = inputSystem.fullPathStr(fileName);
                 FileWriter w = new FileWriter(fileName);
                 mazeData maze = mazeData.getInstance();
                 w.write("Solved Maze:\n");
@@ -52,26 +52,29 @@ public class graphWriter {
 
         public void writeTo3dObj(String fileName){
             try{
+                fileName = inputSystem.fullPathStr(fileName);
                 mazeData maze = mazeData.getInstance();
-                if(maze.data.dimensions() <= 3){
+                if(maze.data.dimensions().length <= 3){
                     FileWriter w = new FileWriter(fileName);
                     int[] dim = new int[3];
-                    dim[0] = 0; dim[1] = 0; dim[2] = 0;
-                    if(maze.data.dimensions() >= 1) dim[0] = maze.data.dimensions()[0];
-                    if(maze.data.dimensions() >= 2) dim[1] = maze.data.dimensions()[1];
-                    if(maze.data.dimensions() >= 3) dim[2] = maze.data.dimensions()[2];
-                    String s = "solid Maze\n";
+                    StringBuilder s = new StringBuilder("solid Maze\n");
                     for(int i = 0; i < maze.data.size(); i++){
-
+                        int val = maze.data.get(i);
+                        if(val == 1){
+                            int[] xd = maze.loopDimensions(i);
+                            if(maze.data.dimensions().length >= 1) dim[0] = xd[0];
+                            if(maze.data.dimensions().length >= 2) dim[1] = xd[1];
+                            if(maze.data.dimensions().length >= 3) dim[2] = xd[2];
+                            s.append(cube(dim));
+                        }
                     }
-                    s += "endsolid Maze";
-                    w.write(s);
+                    s.append("endsolid Maze");
+                    w.write(s.toString());
                     w.close();
                 }
                 else{
                     throw new RuntimeException("Over 3 dimensions");
                 }
-
             }
             catch (FileNotFoundException e){
                 System.out.println("File not Found");
@@ -84,16 +87,15 @@ public class graphWriter {
 
 
 
-        private String cube(int x, int y, int z){
+        private String cube(int[] xd){
             StringBuilder s = new StringBuilder();
             for(int i = 0; i < 8; i++){
-                for(int j = 0; j < 8; j++){
-                    for(int k = 0; k < 8; k++){
-                        if(!(i == j || j == k || i == k)){
-                            int[] cord = {x, y, z};
-                            int[] iA = pointPlus(pointId(i), cord);
-                            int[] jA = pointPlus(pointId(j), cord);
-                            int[] kA = pointPlus(pointId(k), cord);
+                for(int j = i; j < 8; j++){
+                    for(int k = j; k < 8; k++){
+                        if(!(i == j || j == k)){
+                            int[] iA = pointPlus(pointId(i), xd);
+                            int[] jA = pointPlus(pointId(j), xd);
+                            int[] kA = pointPlus(pointId(k), xd);
                             s.append(oneFace(iA, jA, kA));
                         }
                     }
