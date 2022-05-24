@@ -49,11 +49,12 @@ public class inputSystem {
             System.out.println("Type Dimensions:");
             for(int i = 0; i < n; i++){
                 dimensions[i] = sc.nextInt();
-                if(dimensions[i] == 1) throw new RuntimeException("Too Small Dimension");
+                if(dimensions[i] < 1) throw new RuntimeException("Too Small Dimension");
             }
+            System.out.println("Print The Data. Goes in Incrementing Order or dimensions mod the space");
             mazeData m = mazeData.getInstance(); m.makeArray(dimensions);
             for(int i = 0; i < mazeData.getInstance().data.size(); i++){
-                String s = sc.nextLine();
+                String s = sc.next();
                 inputSpace.add(s.charAt(0));
                 for(int j = 1; j < s.length() && i < mazeData.getInstance().data.size(); j++){
                     inputSpace.add(s.charAt(j));

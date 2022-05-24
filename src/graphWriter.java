@@ -1,7 +1,6 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class graphWriter {
         public graphWriter(){
@@ -12,6 +11,7 @@ public class graphWriter {
         public void writeToFile(String fileName){
             try{
                 fileName = inputSystem.fullPathStr(fileName);
+                FileOutputStream x = new FileOutputStream(fileName); x = null;
                 FileWriter w = new FileWriter(fileName);
                 mazeData maze = mazeData.getInstance();
                 w.write("Solved Maze:\n");
@@ -69,6 +69,7 @@ public class graphWriter {
         public void writeTo3dObj(String fileName){
             try{
                 fileName = inputSystem.fullPathStr(fileName);
+                FileOutputStream x = new FileOutputStream(fileName); x = null;
                 mazeData maze = mazeData.getInstance();
                 if(maze.data.dimensions().length <= 3){
                     FileWriter w = new FileWriter(fileName);

@@ -20,12 +20,14 @@ public class main {
     public static final String fileNameIn = "maze.txt";
     public static final String fileNameOutFile = "mazeOut.txt";
     public static final String fileNameOutStl = "mazeTest.stl";
+    public static boolean autoRead = false;
+    public static boolean autoWrite = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         //main cdoe and user interface to read the data form the file or user
         inputSystem input = new inputSystem();
         //used to differentiate a debug mode where maze auto-loaded from final one
-        if(fileNameIn == null){
+        if(!autoRead){
             System.out.println("Hello, and welcome to the maze solving algorhtm. What would you want to do?");
             System.out.println("Load SelectFile:1");
             System.out.println("Load ConsolePrompt:2");
@@ -33,12 +35,11 @@ public class main {
             int n = sc.nextInt();
             if(n == 1){
                 System.out.println("Enter Path:");
-                String path = sc.nextLine();
+                String path = sc.next();
                 System.out.println("Reading from Path: " + path);
                 input.readTxtFile(path);
             }
             else if(n == 2){
-                System.out.println("Not Functional Yet");
                 input.readCMD();
             }
             else{
@@ -56,30 +57,28 @@ public class main {
         System.out.println("Maze Solved");
         graphWriter writer = new graphWriter();
         //used to differentiate a debug mode where maze auto-printed from final one
-        if(fileNameOutFile == null){
+        if(!autoWrite){
             System.out.println("What would you like to Output to?\n1-file, 2-cmd, 3-stl:");
             Scanner sc = new Scanner(System.in);
             int n = sc.nextInt();
             if(n == 1){
-                System.out.println("Input Path:");
-                String path = sc.nextLine();
+                System.out.println("Output Path with suffix:");
+                String path = sc.next();
                 writer.writeToFile(path);
             }
             else if(n == 2){
-                System.out.println("Not Functional Yet");
                 writer.writeToCmd();
+                System.out.println();
             }
             else if(n == 3){
-                System.out.println("Input Path:");
-                String path = sc.nextLine();
+                System.out.println("Output Path with suffix:");
+                String path = sc.next();
                 writer.writeTo3dObj(path);
             }
             else{
                 throw new RuntimeException("Selection");
             }
-            System.out.println("Enter Path:");
-            String s = sc.nextLine();
-            System.out.println("Reading from Path: " + s);
+
         }
         else{
             writer.writeToFile(fileNameOutFile);
