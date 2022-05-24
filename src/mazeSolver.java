@@ -1,4 +1,6 @@
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class mazeSolver{
@@ -16,14 +18,48 @@ public class mazeSolver{
                 Set<node> settledNodes = new HashSet<node>();
                 Set<node> unsettledNodes = new HashSet<node>();
                 unsettledNodes.add(start);
-                while(unsettledNodes.size() != 0){
+                while(!unsettledNodes.isEmpty()){
                     node curNode = getLowDist(unsettledNodes);
                     unsettledNodes.remove(curNode);
-
+                    for(int i = 0; i < curNode.neighbors.toArray().length; i++){
+                        node adjNode = (node)(curNode.neighbors.toArray())[i];
+                        if(!settledNodes.contains(adjNode)){
+                            calcMinDist(adjNode, curNode);
+                            unsettledNodes.add(adjNode);
+                        }
+                    }
+                    settledNodes.add(curNode);
                 }
+                //extract path
+                List<node> shortestPath = end.shortestPath;
+                mazeData.getInstance().listDir.add(shortestPath);
             }
         }
     }
 
+    //dijkstras helper function
+    private static node getLowDist(Set<node> unsettledNodes){
+        node lowDistNode = (node)unsettledNodes.toArray()[0];
+        int lowDist = ((node) unsettledNodes.toArray()[0]).dist;
+        for(node n : unsettledNodes){
+            int nodeDist = n.dist;
+            if(nodeDist < lowDist){
+                lowDist = nodeDist;
+                lowDistNode = n;
+            }
+        }
+        return lowDistNode;
+    }
 
+    private static void calcMinDist(node evalN, node source){
+        //weight is 1, remember I went with a voxel based system. In a 2d world i can do weight and intersection system but with n dimensions
+        //it gets trickier to do so
+        int sourceDist = source.dist;
+        if(sourceDist + 1 < evalN.dist){
+            evalN.dist = sourceDist + 1;
+            LinkedList<node> shortestPath = new LinkedList<>(source.shortestPath);
+            shortestPath.add(source);
+            evalN.shortestPath = shortestPath;
+        }
+    }
 }

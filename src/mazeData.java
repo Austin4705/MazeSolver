@@ -3,6 +3,7 @@ import org.api.hyperdrive.NArrayInt;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 
 //singleton implementation of class in order to function as object container. holds all data for the maze inclding the n dimensional array, solved path, and adjancy graph
@@ -26,7 +27,7 @@ public class mazeData {
     public HashMap<Integer, node> adjListS = new HashMap<Integer, node>();
     public HashMap<Integer, node> adjListE = new HashMap<Integer, node>();
     //list in order of the path used for each pass of start to end for each combo
-    public ArrayList<ArrayList<node>> listDir = new ArrayList<ArrayList<node>>();
+    public ArrayList<List<node>> listDir = new ArrayList<List<node>>();
 //endregion
 
 //region func
@@ -77,6 +78,7 @@ public class mazeData {
         if(c == 'X') return 1;
         if(c == 'S') return 2;
         if(c == 'E') return 3;
+        if(c == 'P') return 4;
         else return -1;
     }
     //helper functions, both used to pass between data formats
@@ -85,6 +87,7 @@ public class mazeData {
         if(i == 1) return 'X';
         if(i == 2) return 'S';
         if(i == 3) return 'E';
+        if(i == 4) return 'P';
         else return 'O';
     }
     //getters

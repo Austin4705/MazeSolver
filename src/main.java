@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files
 
+
+
 /*
 Libraries and sources for referenced code used:
 https://www.baeldung.com/java-dijkstra
@@ -16,6 +18,8 @@ https://github.com/junit-team/junit5
 public class main {
     public static final String fileName = "maze.txt";
     public static final String filePath =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName;
+    public static final String fileName2 = "mazeOut.txt";
+    public static final String filePath2 =  System.getProperty("user.dir").substring(0, System.getProperty("user.dir").length()) + "\\Mazes\\" + fileName;
 
     public static void main(String[] args) {
         //main cdoe and user interface to read the data form the file or user
@@ -47,6 +51,9 @@ public class main {
         System.out.println("Maze Successfully Loaded");
         //enter parsestage of code, dont need to pass around data but need to start off each bit of the algorithm
         graphGenerator g = new graphGenerator();
+        mazeSolver m = new mazeSolver();
+        System.out.println("Maze Solved");
+
     }
 
 } 
