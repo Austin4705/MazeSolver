@@ -12,7 +12,6 @@ import java.util.Scanner; // Import the Scanner class to read text files
 Libraries and sources for referenced code used:
 https://www.baeldung.com/java-dijkstra
 https://github.com/adamierymenko/hyperdrive
-https://github.com/junit-team/junit5
  */
 
 public class main {
