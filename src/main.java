@@ -20,7 +20,7 @@ public class main {
     public static final String fileNameIn = "maze.txt";
     public static final String fileNameOutFile = "mazeOut.txt";
     public static final String fileNameOutStl = "mazeTest.stl";
-    public static boolean autoRead = true;
+    public static boolean autoRead = false;
     public static boolean autoWrite = false;
 
     public static void main(String[] args) throws InterruptedException {
