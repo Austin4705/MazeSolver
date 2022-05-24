@@ -11,7 +11,7 @@ public class mazeSolver{
         //while the algorithm is programmed to try and connect all start and end nodes together,
         // it doesn't necessary do multi starts in the most efficient way, just guarantees it will find a solution if
         //one is out there. Tries and guarentees most effective single case solution still
-        //in the future i would like to implement A* with a geometric distance heuristic. currently i think dijkstras will suffice for the project
+        //in the future i would like to implement A* with a geometric distance heuristic. currently i think dijkstras will suffice for the project and any maze under 1000 len and 6 dimensions
         for(node start : mazeData.getInstance().adjListS.values()){
             for(node end : mazeData.getInstance().adjListE.values()){
                 //the actual dijkstras implementation is based off of Baeldung article on it
