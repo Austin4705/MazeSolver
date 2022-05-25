@@ -1,5 +1,6 @@
 To work with the program simply compile and run it (need the hyperdrive library included) and input the maze data you want. Then choose a file destination for output
 Hi. This program lets you solve mazes:
+Made by Austin Wu MIT License
 
 # class main
     main loop: The main loop of the program

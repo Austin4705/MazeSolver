@@ -1,0 +1,9 @@
+3
+3 3 2
+EXX
+OOO
+XXO
+
+XXX
+XXX
+SOO

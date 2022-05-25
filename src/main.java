@@ -19,7 +19,7 @@ public class main {
     /*This section was for testing but for convince stayed in. It provides the default
     * maze file writing location as well as the default file names if auto in out is enabled */
     public static final String subDir = "\\Mazes\\";
-    public static final String fileNameIn = "maze.txt";
+    public static final String fileNameIn = "mazeInput2.txt";
     public static final String fileNameOutFile = "mazeOut.txt";
     public static final String fileNameOutStl = "mazeTest.stl";
     /*booleans to determine auto in out*/
